@@ -177,8 +177,8 @@ def business(summary, output_location, title):
 )
 @click.option(
     "--output_location",
-    prompt="output location of the presentation results",
-    help="output location of the  presentation results (leave blank, if you want to echo output to terminal)",
+    prompt="output location of the originality results",
+    help="output location of the  originality results (leave blank, if you want to echo output to terminal)",
 )
 def originality(summary, output_location, title):
     pa = OriginalityAgent(summary=summary)
@@ -220,11 +220,39 @@ def originality(summary, output_location, title):
 )
 @click.option(
     "--output_location",
-    prompt="output location of the presentation results",
+    prompt="output location of the code results",
+    help="output location of the code results (leave blank, if you want to echo output to terminal)",
+)
+@click.option(
+    "--git_location",
+    prompt="location where the git repo will be cloned ",
     help="output location of the  presentation results (leave blank, if you want to echo output to terminal)",
 )
-def code(summary, output_location, title, gitlink):
-    click.echo("coming soon")
+def code(summary, output_location, title, gitlink, git_location):
+    c = CodeAgent(
+        summary=summary,
+        git_link=gitlink,
+        repo_download_location=git_location,
+        title=title,
+    )
+    result = c.score()
+    output = []
+    for feature in result:
+        output.append(dict(feature))
+    if output_location:
+        if os.path.isdir(output_location):
+            with open(
+                os.path.join(
+                    output_location, title + "_code_implementation_scores.json"
+                ),
+                "w",
+            ) as outfile:
+                json.dump(output, outfile)
+        else:
+            with open(output_location, "w") as outfile:
+                json.dump(output, outfile)
+    else:
+        click.echo(json.dumps(output))
     pass
 
 
@@ -232,6 +260,7 @@ cli.add_command(preprocess)
 cli.add_command(presentation)
 cli.add_command(business)
 cli.add_command(originality)
+cli.add_command(code)
 
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
