@@ -129,6 +129,8 @@ def judge(ctx,output_location, title, git_link,pdf_link,video_link):
 
     loader.stop()
     write(output_location,title,output,"_final_results.json")
+    end= time.time()
+    print(f"Took {start-end} seconds")
    
 
 cli.add_command(preprocess)
