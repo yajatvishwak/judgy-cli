@@ -29,6 +29,10 @@ judgy is a cli tool that rates your hackathon projects using the power of LLMs
 
 4. Results are in form JSON files.
 
+## Dependency
+
+1. ffmpeg
+
 ## Limitations
 
 - Takes a while - 2 mins or so
