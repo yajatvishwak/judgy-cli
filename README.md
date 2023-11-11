@@ -23,7 +23,7 @@ judgy is a cli tool that rates your hackathon projects using the power of LLMs
 
 2. Copy `.env.example` to `.env`, replace your OPENAI Keys in the `.env` file
 
-3. Run Judgy Preprocess on a project
+3. Run Judgy on a project
 
    `python cli.py judge`
 
