@@ -1,6 +1,6 @@
 # judgy-cli
 
-judgy is a cli tool that rates your hackathon projects using the power of LLMs
+judgy is a cli tool that rates your hackathon projects using the power of LLMs (using OpenAI)
 
 ## What you'll need
 
